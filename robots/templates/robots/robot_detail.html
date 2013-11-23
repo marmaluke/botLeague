@@ -1,3 +1,11 @@
-<h1>{{ object.name }}</h1>
-<h2>{{ object.owner }}</h2>
-<p>ELO score: {{ object.elo_score }}</p>
+<h2>{{ object.name }}</h2>
+<div><strong>owner</strong> {{ object.owner }}</div>
+<div><strong>ELO score</strong> {{ object.elo_score }}</div>
+<ul>
+{% for match in object.as_challenger.all %}
+	<li>{{ match.challenger.name }} vs {{ match.defender.name }}: {{ match.challenger_score }} - {{ match.defender_score }}</li>
+{% endfor %}
+{% for match in object.as_defender.all %}
+	<li>{{ match.challenger.name }} vs {{ match.defender.name }}: {{ match.challenger_score }} - {{ match.defender_score }}</li>
+{% endfor %}
+</ul>

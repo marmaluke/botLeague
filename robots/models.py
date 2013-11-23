@@ -17,3 +17,6 @@ class Match(models.Model):
 	defender_score = models.IntegerField()
 	match_date = models.DateTimeField()
 	game_play = models.TextField()
+
+	def __unicode__(self):
+		return str(self.challenger) + " vs " + str(self.defender)
