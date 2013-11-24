@@ -1,8 +1,0 @@
-<h1>Robots</h1>
-<ul>
-{% for bot in object_list %}
-    <li>{{ bot.name }} - {{ bot.elo_score }}</li>
-{% empty %}
-    <li>No bots yet.</li>
-{% endfor %}
-</ul>

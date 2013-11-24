@@ -1,5 +1,5 @@
 """
-Django settings for rg project.
+Django settings for botLeague project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/
@@ -48,9 +48,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'rg.urls'
+ROOT_URLCONF = 'botLeague.urls'
 
-WSGI_APPLICATION = 'rg.wsgi.application'
+WSGI_APPLICATION = 'botLeague.wsgi.application'
 
 
 # Database
