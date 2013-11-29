@@ -4,7 +4,7 @@ from django.db import models
 class Robot(models.Model):
 	name = models.CharField(max_length=200)
 	elo_score = models.IntegerField(default=1200)
-	path = models.CharField(max_length=255)
+	path = models.FileField(upload_to='bot_code')
 	owner = models.CharField(max_length=100)
 
 	def __unicode__(self):

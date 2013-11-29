@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import generic
 from django.http import HttpResponse
-from robots.models import Robot
+from robots.models import Robot, Match
 
 # Create your views here.
 class RobotListView(generic.ListView):
@@ -14,6 +14,9 @@ class RobotDetailView(generic.DetailView):
 		context = super(RobotDetailView, self).get_context_data(**kwargs)
 		context['all_bots'] = Robot.objects.all()
 		return context
+	
+class MatchDetailView(generic.DetailView):
+	model = Match
 
 def challenge(request, pk):
 	challenger = Robot.objects.get(pk=pk)
