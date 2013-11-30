@@ -1,10 +1,7 @@
 from robots.models import Match
-import os
-import ast
-from robots.rgkit.settings import settings
-from robots.rgkit import game
 import subprocess
 from django.utils import timezone
+import base64
 
 
 def play_match(challenger, defender):
@@ -21,7 +18,7 @@ def play_match(challenger, defender):
     history = lines[0]
     scores = eval(lines[1])
 
-    match.game_play = lines[0]
+    match.game_play = lines[0].replace("'", '"').replace("(", "[").replace(")", "]")
     match.challenger_score = scores[0]
     match.defender_score = scores[1]
     match.match_date = timezone.now()

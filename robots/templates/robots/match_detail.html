@@ -1,2 +1,439 @@
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'robots/css/main.css' %}" />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+
 <h2>{{ object.challenger.name }} vs {{ object.defender.name }}</h2>
 <div><strong>Played at</strong> {{ object.match_date }}</div>
+
+<div id="replay">
+    <div class="clearfix">
+        <div id="board" class="left">
+            <div class="row clearfix">
+                <span class="black item left" id="piece_0_0"></span>
+                <span class="black item left" id="piece_1_0"></span>
+                <span class="black item left" id="piece_2_0"></span>
+                <span class="black item left" id="piece_3_0"></span>
+                <span class="black item left" id="piece_4_0"></span>
+                <span class="black item left" id="piece_5_0"></span>
+                <span class="black item left" id="piece_6_0"></span>
+                <span class="black item left" id="piece_7_0"></span>
+                <span class="black item left" id="piece_8_0"></span>
+                <span class="black item left" id="piece_9_0"></span>
+                <span class="black item left" id="piece_10_0"></span>
+                <span class="black item left" id="piece_11_0"></span>
+                <span class="black item left" id="piece_12_0"></span>
+                <span class="black item left" id="piece_13_0"></span>
+                <span class="black item left" id="piece_14_0"></span>
+                <span class="black item left" id="piece_15_0"></span>
+                <span class="black item left" id="piece_16_0"></span>
+                <span class="black item left" id="piece_17_0"></span>
+                <span class="black item left" id="piece_18_0"></span>
+            </div>
+            <div class="row clearfix">
+                <span class="black item left" id="piece_0_1"></span>
+                <span class="black item left" id="piece_1_1"></span>
+                <span class="black item left" id="piece_2_1"></span>
+                <span class="black item left" id="piece_3_1"></span>
+                <span class="black item left" id="piece_4_1"></span>
+                <span class="black item left" id="piece_5_1"></span>
+                <span class="black item left" id="piece_6_1"></span>
+                <span class="item left" id="piece_7_1"></span>
+                <span class="item left" id="piece_8_1"></span>
+                <span class="item left" id="piece_9_1"></span>
+                <span class="item left" id="piece_10_1"></span>
+                <span class="item left" id="piece_11_1"></span>
+                <span class="black item left" id="piece_12_1"></span>
+                <span class="black item left" id="piece_13_1"></span>
+                <span class="black item left" id="piece_14_1"></span>
+                <span class="black item left" id="piece_15_1"></span>
+                <span class="black item left" id="piece_16_1"></span>
+                <span class="black item left" id="piece_17_1"></span>
+                <span class="black item left" id="piece_18_1"></span>
+            </div>
+            <div class="row clearfix">
+                <span class="black item left" id="piece_0_2"></span>
+                <span class="black item left" id="piece_1_2"></span>
+                <span class="black item left" id="piece_2_2"></span>
+                <span class="black item left" id="piece_3_2"></span>
+                <span class="black item left" id="piece_4_2"></span>
+                <span class="item left" id="piece_5_2"></span>
+                <span class="item left" id="piece_6_2"></span>
+                <span class="item left" id="piece_7_2"></span>
+                <span class="item left" id="piece_8_2"></span>
+                <span class="item left" id="piece_9_2"></span>
+                <span class="item left" id="piece_10_2"></span>
+                <span class="item left" id="piece_11_2"></span>
+                <span class="item left" id="piece_12_2"></span>
+                <span class="item left" id="piece_13_2"></span>
+                <span class="black item left" id="piece_14_2"></span>
+                <span class="black item left" id="piece_15_2"></span>
+                <span class="black item left" id="piece_16_2"></span>
+                <span class="black item left" id="piece_17_2"></span>
+                <span class="black item left" id="piece_18_2"></span>
+            </div>
+            <div class="row clearfix">
+                <span class="black item left" id="piece_0_3"></span>
+                <span class="black item left" id="piece_1_3"></span>
+                <span class="black item left" id="piece_2_3"></span>
+                <span class="item left" id="piece_3_3"></span>
+                <span class="item left" id="piece_4_3"></span>
+                <span class="item left" id="piece_5_3"></span>
+                <span class="item left" id="piece_6_3"></span>
+                <span class="item left" id="piece_7_3"></span>
+                <span class="item left" id="piece_8_3"></span>
+                <span class="item left" id="piece_9_3"></span>
+                <span class="item left" id="piece_10_3"></span>
+                <span class="item left" id="piece_11_3"></span>
+                <span class="item left" id="piece_12_3"></span>
+                <span class="item left" id="piece_13_3"></span>
+                <span class="item left" id="piece_14_3"></span>
+                <span class="item left" id="piece_15_3"></span>
+                <span class="black item left" id="piece_16_3"></span>
+                <span class="black item left" id="piece_17_3"></span>
+                <span class="black item left" id="piece_18_3"></span>
+            </div>
+            <div class="row clearfix">
+                <span class="black item left" id="piece_0_4"></span>
+                <span class="black item left" id="piece_1_4"></span>
+                <span class="black item left" id="piece_2_4"></span>
+                <span class="item left" id="piece_3_4"></span>
+                <span class="item left" id="piece_4_4"></span>
+                <span class="item left" id="piece_5_4"></span>
+                <span class="item left" id="piece_6_4"></span>
+                <span class="item left" id="piece_7_4"></span>
+                <span class="item left" id="piece_8_4"></span>
+                <span class="item left" id="piece_9_4"></span>
+                <span class="item left" id="piece_10_4"></span>
+                <span class="item left" id="piece_11_4"></span>
+                <span class="item left" id="piece_12_4"></span>
+                <span class="item left" id="piece_13_4"></span>
+                <span class="item left" id="piece_14_4"></span>
+                <span class="item left" id="piece_15_4"></span>
+                <span class="black item left" id="piece_16_4"></span>
+                <span class="black item left" id="piece_17_4"></span>
+                <span class="black item left" id="piece_18_4"></span>
+            </div>
+            <div class="row clearfix">
+                <span class="black item left" id="piece_0_5"></span>
+                <span class="black item left" id="piece_1_5"></span>
+                <span class="item left" id="piece_2_5"></span>
+                <span class="item left" id="piece_3_5"></span>
+                <span class="item left" id="piece_4_5"></span>
+                <span class="item left" id="piece_5_5"></span>
+                <span class="item left" id="piece_6_5"></span>
+                <span class="item left" id="piece_7_5"></span>
+                <span class="item left" id="piece_8_5"></span>
+                <span class="item left" id="piece_9_5"></span>
+                <span class="item left" id="piece_10_5"></span>
+                <span class="item left" id="piece_11_5"></span>
+                <span class="item left" id="piece_12_5"></span>
+                <span class="item left" id="piece_13_5"></span>
+                <span class="item left" id="piece_14_5"></span>
+                <span class="item left" id="piece_15_5"></span>
+                <span class="item left" id="piece_16_5"></span>
+                <span class="black item left" id="piece_17_5"></span>
+                <span class="black item left" id="piece_18_5"></span>
+            </div>
+            <div class="row clearfix">
+                <span class="black item left" id="piece_0_6"></span>
+                <span class="black item left" id="piece_1_6"></span>
+                <span class="item left" id="piece_2_6"></span>
+                <span class="item left" id="piece_3_6"></span>
+                <span class="item left" id="piece_4_6"></span>
+                <span class="item left" id="piece_5_6"></span>
+                <span class="item left" id="piece_6_6"></span>
+                <span class="item left" id="piece_7_6"></span>
+                <span class="item left" id="piece_8_6"></span>
+                <span class="item left" id="piece_9_6"></span>
+                <span class="item left" id="piece_10_6"></span>
+                <span class="item left" id="piece_11_6"></span>
+                <span class="item left" id="piece_12_6"></span>
+                <span class="item left" id="piece_13_6"></span>
+                <span class="item left" id="piece_14_6"></span>
+                <span class="item left" id="piece_15_6"></span>
+                <span class="item left" id="piece_16_6"></span>
+                <span class="black item left" id="piece_17_6"></span>
+                <span class="black item left" id="piece_18_6"></span>
+            </div>
+            <div class="row clearfix">
+                <span class="black item left" id="piece_0_7"></span>
+                <span class="item left" id="piece_1_7"></span>
+                <span class="item left" id="piece_2_7"></span>
+                <span class="item left" id="piece_3_7"></span>
+                <span class="item left" id="piece_4_7"></span>
+                <span class="item left" id="piece_5_7"></span>
+                <span class="item left" id="piece_6_7"></span>
+                <span class="item left" id="piece_7_7"></span>
+                <span class="item left" id="piece_8_7"></span>
+                <span class="item left" id="piece_9_7"></span>
+                <span class="item left" id="piece_10_7"></span>
+                <span class="item left" id="piece_11_7"></span>
+                <span class="item left" id="piece_12_7"></span>
+                <span class="item left" id="piece_13_7"></span>
+                <span class="item left" id="piece_14_7"></span>
+                <span class="item left" id="piece_15_7"></span>
+                <span class="item left" id="piece_16_7"></span>
+                <span class="item left" id="piece_17_7"></span>
+                <span class="black item left" id="piece_18_7"></span>
+            </div>
+            <div class="row clearfix">
+                <span class="black item left" id="piece_0_8"></span>
+                <span class="item left" id="piece_1_8"></span>
+                <span class="item left" id="piece_2_8"></span>
+                <span class="item left" id="piece_3_8"></span>
+                <span class="item left" id="piece_4_8"></span>
+                <span class="item left" id="piece_5_8"></span>
+                <span class="item left" id="piece_6_8"></span>
+                <span class="item left" id="piece_7_8"></span>
+                <span class="item left" id="piece_8_8"></span>
+                <span class="item left" id="piece_9_8"></span>
+                <span class="item left" id="piece_10_8"></span>
+                <span class="item left" id="piece_11_8"></span>
+                <span class="item left" id="piece_12_8"></span>
+                <span class="item left" id="piece_13_8"></span>
+                <span class="item left" id="piece_14_8"></span>
+                <span class="item left" id="piece_15_8"></span>
+                <span class="item left" id="piece_16_8"></span>
+                <span class="item left" id="piece_17_8"></span>
+                <span class="black item left" id="piece_18_8"></span>
+            </div>
+            <div class="row clearfix">
+                <span class="black item left" id="piece_0_9"></span>
+                <span class="item left" id="piece_1_9"></span>
+                <span class="item left" id="piece_2_9"></span>
+                <span class="item left" id="piece_3_9"></span>
+                <span class="item left" id="piece_4_9"></span>
+                <span class="item left" id="piece_5_9"></span>
+                <span class="item left" id="piece_6_9"></span>
+                <span class="item left" id="piece_7_9"></span>
+                <span class="item left" id="piece_8_9"></span>
+                <span class="item left" id="piece_9_9"></span>
+                <span class="item left" id="piece_10_9"></span>
+                <span class="item left" id="piece_11_9"></span>
+                <span class="item left" id="piece_12_9"></span>
+                <span class="item left" id="piece_13_9"></span>
+                <span class="item left" id="piece_14_9"></span>
+                <span class="item left" id="piece_15_9"></span>
+                <span class="item left" id="piece_16_9"></span>
+                <span class="item left" id="piece_17_9"></span>
+                <span class="black item left" id="piece_18_9"></span>
+            </div>
+            <div class="row clearfix">
+                <span class="black item left" id="piece_0_10"></span>
+                <span class="item left" id="piece_1_10"></span>
+                <span class="item left" id="piece_2_10"></span>
+                <span class="item left" id="piece_3_10"></span>
+                <span class="item left" id="piece_4_10"></span>
+                <span class="item left" id="piece_5_10"></span>
+                <span class="item left" id="piece_6_10"></span>
+                <span class="item left" id="piece_7_10"></span>
+                <span class="item left" id="piece_8_10"></span>
+                <span class="item left" id="piece_9_10"></span>
+                <span class="item left" id="piece_10_10"></span>
+                <span class="item left" id="piece_11_10"></span>
+                <span class="item left" id="piece_12_10"></span>
+                <span class="item left" id="piece_13_10"></span>
+                <span class="item left" id="piece_14_10"></span>
+                <span class="item left" id="piece_15_10"></span>
+                <span class="item left" id="piece_16_10"></span>
+                <span class="item left" id="piece_17_10"></span>
+                <span class="black item left" id="piece_18_10"></span>
+            </div>
+            <div class="row clearfix">
+                <span class="black item left" id="piece_0_11"></span>
+                <span class="item left" id="piece_1_11"></span>
+                <span class="item left" id="piece_2_11"></span>
+                <span class="item left" id="piece_3_11"></span>
+                <span class="item left" id="piece_4_11"></span>
+                <span class="item left" id="piece_5_11"></span>
+                <span class="item left" id="piece_6_11"></span>
+                <span class="item left" id="piece_7_11"></span>
+                <span class="item left" id="piece_8_11"></span>
+                <span class="item left" id="piece_9_11"></span>
+                <span class="item left" id="piece_10_11"></span>
+                <span class="item left" id="piece_11_11"></span>
+                <span class="item left" id="piece_12_11"></span>
+                <span class="item left" id="piece_13_11"></span>
+                <span class="item left" id="piece_14_11"></span>
+                <span class="item left" id="piece_15_11"></span>
+                <span class="item left" id="piece_16_11"></span>
+                <span class="item left" id="piece_17_11"></span>
+                <span class="black item left" id="piece_18_11"></span>
+            </div>
+            <div class="row clearfix">
+                <span class="black item left" id="piece_0_12"></span>
+                <span class="black item left" id="piece_1_12"></span>
+                <span class="item left" id="piece_2_12"></span>
+                <span class="item left" id="piece_3_12"></span>
+                <span class="item left" id="piece_4_12"></span>
+                <span class="item left" id="piece_5_12"></span>
+                <span class="item left" id="piece_6_12"></span>
+                <span class="item left" id="piece_7_12"></span>
+                <span class="item left" id="piece_8_12"></span>
+                <span class="item left" id="piece_9_12"></span>
+                <span class="item left" id="piece_10_12"></span>
+                <span class="item left" id="piece_11_12"></span>
+                <span class="item left" id="piece_12_12"></span>
+                <span class="item left" id="piece_13_12"></span>
+                <span class="item left" id="piece_14_12"></span>
+                <span class="item left" id="piece_15_12"></span>
+                <span class="item left" id="piece_16_12"></span>
+                <span class="black item left" id="piece_17_12"></span>
+                <span class="black item left" id="piece_18_12"></span>
+            </div>
+            <div class="row clearfix">
+                <span class="black item left" id="piece_0_13"></span>
+                <span class="black item left" id="piece_1_13"></span>
+                <span class="item left" id="piece_2_13"></span>
+                <span class="item left" id="piece_3_13"></span>
+                <span class="item left" id="piece_4_13"></span>
+                <span class="item left" id="piece_5_13"></span>
+                <span class="item left" id="piece_6_13"></span>
+                <span class="item left" id="piece_7_13"></span>
+                <span class="item left" id="piece_8_13"></span>
+                <span class="item left" id="piece_9_13"></span>
+                <span class="item left" id="piece_10_13"></span>
+                <span class="item left" id="piece_11_13"></span>
+                <span class="item left" id="piece_12_13"></span>
+                <span class="item left" id="piece_13_13"></span>
+                <span class="item left" id="piece_14_13"></span>
+                <span class="item left" id="piece_15_13"></span>
+                <span class="item left" id="piece_16_13"></span>
+                <span class="black item left" id="piece_17_13"></span>
+                <span class="black item left" id="piece_18_13"></span>
+            </div>
+            <div class="row clearfix">
+                <span class="black item left" id="piece_0_14"></span>
+                <span class="black item left" id="piece_1_14"></span>
+                <span class="black item left" id="piece_2_14"></span>
+                <span class="item left" id="piece_3_14"></span>
+                <span class="item left" id="piece_4_14"></span>
+                <span class="item left" id="piece_5_14"></span>
+                <span class="item left" id="piece_6_14"></span>
+                <span class="item left" id="piece_7_14"></span>
+                <span class="item left" id="piece_8_14"></span>
+                <span class="item left" id="piece_9_14"></span>
+                <span class="item left" id="piece_10_14"></span>
+                <span class="item left" id="piece_11_14"></span>
+                <span class="item left" id="piece_12_14"></span>
+                <span class="item left" id="piece_13_14"></span>
+                <span class="item left" id="piece_14_14"></span>
+                <span class="item left" id="piece_15_14"></span>
+                <span class="black item left" id="piece_16_14"></span>
+                <span class="black item left" id="piece_17_14"></span>
+                <span class="black item left" id="piece_18_14"></span>
+            </div>
+            <div class="row clearfix">
+                <span class="black item left" id="piece_0_15"></span>
+                <span class="black item left" id="piece_1_15"></span>
+                <span class="black item left" id="piece_2_15"></span>
+                <span class="item left" id="piece_3_15"></span>
+                <span class="item left" id="piece_4_15"></span>
+                <span class="item left" id="piece_5_15"></span>
+                <span class="item left" id="piece_6_15"></span>
+                <span class="item left" id="piece_7_15"></span>
+                <span class="item left" id="piece_8_15"></span>
+                <span class="item left" id="piece_9_15"></span>
+                <span class="item left" id="piece_10_15"></span>
+                <span class="item left" id="piece_11_15"></span>
+                <span class="item left" id="piece_12_15"></span>
+                <span class="item left" id="piece_13_15"></span>
+                <span class="item left" id="piece_14_15"></span>
+                <span class="item left" id="piece_15_15"></span>
+                <span class="black item left" id="piece_16_15"></span>
+                <span class="black item left" id="piece_17_15"></span>
+                <span class="black item left" id="piece_18_15"></span>
+            </div>
+            <div class="row clearfix">
+                <span class="black item left" id="piece_0_16"></span>
+                <span class="black item left" id="piece_1_16"></span>
+                <span class="black item left" id="piece_2_16"></span>
+                <span class="black item left" id="piece_3_16"></span>
+                <span class="black item left" id="piece_4_16"></span>
+                <span class="item left" id="piece_5_16"></span>
+                <span class="item left" id="piece_6_16"></span>
+                <span class="item left" id="piece_7_16"></span>
+                <span class="item left" id="piece_8_16"></span>
+                <span class="item left" id="piece_9_16"></span>
+                <span class="item left" id="piece_10_16"></span>
+                <span class="item left" id="piece_11_16"></span>
+                <span class="item left" id="piece_12_16"></span>
+                <span class="item left" id="piece_13_16"></span>
+                <span class="black item left" id="piece_14_16"></span>
+                <span class="black item left" id="piece_15_16"></span>
+                <span class="black item left" id="piece_16_16"></span>
+                <span class="black item left" id="piece_17_16"></span>
+                <span class="black item left" id="piece_18_16"></span>
+            </div>
+            <div class="row clearfix">
+                <span class="black item left" id="piece_0_17"></span>
+                <span class="black item left" id="piece_1_17"></span>
+                <span class="black item left" id="piece_2_17"></span>
+                <span class="black item left" id="piece_3_17"></span>
+                <span class="black item left" id="piece_4_17"></span>
+                <span class="black item left" id="piece_5_17"></span>
+                <span class="black item left" id="piece_6_17"></span>
+                <span class="item left" id="piece_7_17"></span>
+                <span class="item left" id="piece_8_17"></span>
+                <span class="item left" id="piece_9_17"></span>
+                <span class="item left" id="piece_10_17"></span>
+                <span class="item left" id="piece_11_17"></span>
+                <span class="black item left" id="piece_12_17"></span>
+                <span class="black item left" id="piece_13_17"></span>
+                <span class="black item left" id="piece_14_17"></span>
+                <span class="black item left" id="piece_15_17"></span>
+                <span class="black item left" id="piece_16_17"></span>
+                <span class="black item left" id="piece_17_17"></span>
+                <span class="black item left" id="piece_18_17"></span>
+            </div>
+            <div class="row clearfix">
+                <span class="black item left" id="piece_0_18"></span>
+                <span class="black item left" id="piece_1_18"></span>
+                <span class="black item left" id="piece_2_18"></span>
+                <span class="black item left" id="piece_3_18"></span>
+                <span class="black item left" id="piece_4_18"></span>
+                <span class="black item left" id="piece_5_18"></span>
+                <span class="black item left" id="piece_6_18"></span>
+                <span class="black item left" id="piece_7_18"></span>
+                <span class="black item left" id="piece_8_18"></span>
+                <span class="black item left" id="piece_9_18"></span>
+                <span class="black item left" id="piece_10_18"></span>
+                <span class="black item left" id="piece_11_18"></span>
+                <span class="black item left" id="piece_12_18"></span>
+                <span class="black item left" id="piece_13_18"></span>
+                <span class="black item left" id="piece_14_18"></span>
+                <span class="black item left" id="piece_15_18"></span>
+                <span class="black item left" id="piece_16_18"></span>
+                <span class="black item left" id="piece_17_18"></span>
+                <span class="black item left" id="piece_18_18"></span>
+            </div>
+        </div>
+        <div id="panel" class="left">
+            <div>Click a robot to view its info.</div>
+        </div>
+    </div>
+
+    <div id="replay_info" class="clearfix">
+        <div class="left">
+            Turn: <span id="turn_label"></span> | 
+            <span class="red">{{ object.challenger.name }}: <span id="p1_label"></span></span> |
+            <span class="blue">{{ object.defender.name }}: <span id="p2_label"></span></span>
+        </div>
+        <div class="right">
+            <button id="btn-play" class="small"><i class="fa nom fa-play"></i></button> |
+            <button id="btn-prev" class="small"><i class="fa nom fa-step-backward"></i></button>
+            <button id="btn-next" class="small"><i class="fa nom fa-step-forward"></i></button>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="{% static 'robots/js/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'robots/js/replay.js' %}"></script>
+{% load robots_extras %}
+<script type="text/javascript" src="data:text/javascript;base64,
+{% filter b64encode %}
+{% autoescape off %}
+replay_callback({{ object.game_play }})
+{% endautoescape %}
+{% endfilter %}
+"></script>
