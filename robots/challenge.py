@@ -3,6 +3,8 @@ import subprocess
 from django.utils import timezone
 import base64
 import math
+from botLeague import settings
+import os
 
 #elo rank algorithm     
 def calculate_elo_rank(challenger_rank=1600, defender_rank=1600, challenger_won=True, penalize_loser=True):
@@ -40,7 +42,7 @@ def play_match(challenger, defender):
     bot2 = defender.path.path
 
     result = subprocess.check_output(['python', 'match.py', bot1, bot2],
-        cwd='/home/mark/projects/rg/rgkit'
+        cwd=os.path.join(settings.BASE_DIR, 'rgkit')
     )
     lines = result.split('\n')
 
