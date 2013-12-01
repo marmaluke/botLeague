@@ -46,8 +46,8 @@ def play_match(challenger, defender):
     )
     lines = result.split('\n')
 
-    history = lines[0]
-    scores = eval(lines[1])
+    history = lines[-3]
+    scores = eval(lines[-2])
 
     match.game_play = lines[0].replace("'", '"').replace("(", "[").replace(")", "]")
     match.challenger_score = scores[0]
