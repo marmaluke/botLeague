@@ -10,3 +10,14 @@
     <li>No bots yet.</li>
 {% endfor %}
 </ul>
+
+<form action="{% url 'robots:run_tournament' %}" method="POST">
+	{% csrf_token %}
+	<input type="submit" value="Run tournament"/>
+</form>
+
+<form action="{% url 'robots:reset_scores' %}" method="POST">
+	{% csrf_token %}
+	<input type="submit" value="Reset scores"/>
+</form>
+

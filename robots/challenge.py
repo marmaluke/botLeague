@@ -1,11 +1,9 @@
 from robots.models import Match
 import subprocess
 from django.utils import timezone
-import base64
 import math
 from botLeague import settings
 import os
-from symbol import except_clause
 
 #elo rank algorithm     
 def calculate_elo_rank(challenger_rank=1600, defender_rank=1600, challenger_won=True, penalize_loser=True):
@@ -35,15 +33,8 @@ def calculate_elo_rank(challenger_rank=1600, defender_rank=1600, challenger_won=
     return (new_loser_rank, new_winner_rank)
 
 def play_match(challenger, defender):
-    match = Match()
-    match.challenger = challenger
-    match.defender = defender
-
-    bot1 = challenger.path.path
-    bot2 = defender.path.path
-    
     try:
-        result = subprocess.check_output(['python', 'match.py', bot1, bot2],
+        result = subprocess.check_output(['python', 'match.py', challenger.path.path, defender.path.path],
             cwd=os.path.join(settings.BASE_DIR, 'rgkit')
         )
         lines = result.split('\n')
@@ -53,16 +44,16 @@ def play_match(challenger, defender):
                 history = line.split('=')[1]
             elif line.startswith("scores"):
                 scores = eval(line.split('=')[1])
+
+        match = Match()
+        match.challenger = challenger
+        match.defender = defender
         
         match.game_play = history.replace("'", '"').replace("(", "[").replace(")", "]")
         match.challenger_score = scores[0]
         match.defender_score = scores[1]
         match.match_date = timezone.now()
         match.save()
-    
-        challenger.elo_score, defender.elo_score = calculate_elo_rank(challenger.elo_score, defender.elo_score, scores[0] > scores[1])
-        challenger.save()
-        defender.save()
     
         return (None, match)
     except subprocess.CalledProcessError as e:
