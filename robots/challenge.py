@@ -5,6 +5,7 @@ import base64
 import math
 from botLeague import settings
 import os
+from symbol import except_clause
 
 #elo rank algorithm     
 def calculate_elo_rank(challenger_rank=1600, defender_rank=1600, challenger_won=True, penalize_loser=True):
@@ -40,23 +41,30 @@ def play_match(challenger, defender):
 
     bot1 = challenger.path.path
     bot2 = defender.path.path
-
-    result = subprocess.check_output(['python', 'match.py', bot1, bot2],
-        cwd=os.path.join(settings.BASE_DIR, 'rgkit')
-    )
-    lines = result.split('\n')
-
-    history = lines[-3]
-    scores = eval(lines[-2])
-
-    match.game_play = lines[0].replace("'", '"').replace("(", "[").replace(")", "]")
-    match.challenger_score = scores[0]
-    match.defender_score = scores[1]
-    match.match_date = timezone.now()
-    match.save()
-
-    challenger.elo_score, defender.elo_score = calculate_elo_rank(challenger.elo_score, defender.elo_score, scores[0] > scores[1])
-    challenger.save()
-    defender.save()
-
-    return match
+    
+    try:
+        result = subprocess.check_output(['python', 'match.py', bot1, bot2],
+            cwd=os.path.join(settings.BASE_DIR, 'rgkit')
+        )
+        lines = result.split('\n')
+        
+        for line in lines:
+            if line.startswith("history"):
+                history = line.split('=')[1]
+            elif line.startswith("scores"):
+                scores = eval(line.split('=')[1])
+        
+        match.game_play = history.replace("'", '"').replace("(", "[").replace(")", "]")
+        match.challenger_score = scores[0]
+        match.defender_score = scores[1]
+        match.match_date = timezone.now()
+        match.save()
+    
+        challenger.elo_score, defender.elo_score = calculate_elo_rank(challenger.elo_score, defender.elo_score, scores[0] > scores[1])
+        challenger.save()
+        defender.save()
+    
+        return (None, match)
+    except subprocess.CalledProcessError as e:
+        print e
+        return (e, None)

@@ -1,12 +1,13 @@
 from django.views import generic
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from robots.models import Robot, Match
 from robots.challenge import play_match
 
 # Create your views here.
 class RobotListView(generic.ListView):
-	model = Robot
+	#model = Robot
+	queryset = Robot.objects.all()
 
 class RobotDetailView(generic.DetailView):
 	model = Robot
@@ -22,5 +23,8 @@ class MatchDetailView(generic.DetailView):
 def challenge(request, pk):
 	challenger = Robot.objects.get(pk=pk)
 	defender = Robot.objects.get(pk=request.POST['opponent'])
-	match = play_match(challenger, defender)
-	return HttpResponseRedirect(reverse('robots:match', args=(match.id,)))
+	(exc, match) = play_match(challenger, defender)
+	if exc is None:
+		return HttpResponseRedirect(reverse('robots:match', args=(match.id,)))
+	else:
+		return HttpResponse("Game failed: {0}".format(exc))

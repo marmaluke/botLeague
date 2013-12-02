@@ -28,5 +28,5 @@ if __name__ == '__main__':
     for i in range(settings.max_turns):
         g.run_turn()
     
-    print g.history
-    print g.get_scores()
+    print "history={0}".format(g.history)
+    print "scores={0}".format(g.get_scores())

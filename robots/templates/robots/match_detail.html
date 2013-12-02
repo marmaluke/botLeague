@@ -3,7 +3,12 @@
 <link rel="stylesheet" type="text/css" href="{% static 'robots/css/main.css' %}" />
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
 
-<h2>{{ object.challenger.name }} vs {{ object.defender.name }}</h2>
+<h2>
+	<a href="{% url 'robots:detail' object.challenger.id %}">{{ object.challenger.name }}</a>
+ 	vs
+ 	<a href="{% url 'robots:detail' object.defender.id %}">{{ object.defender.name }}</a>
+ </h2>
+<a href="{% url 'robots:index' %}">Back to index</a>
 <div><strong>Played at</strong> {{ object.match_date|localtime|date:'N j, Y, P T' }}</div>
 
 <div id="replay">
