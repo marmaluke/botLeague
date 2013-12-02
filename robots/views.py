@@ -7,7 +7,7 @@ from robots.challenge import play_match
 # Create your views here.
 class RobotListView(generic.ListView):
 	#model = Robot
-	queryset = Robot.objects.all()
+	queryset = Robot.objects.order_by("-elo_score")
 
 class RobotDetailView(generic.DetailView):
 	model = Robot
