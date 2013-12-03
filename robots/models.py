@@ -8,7 +8,7 @@ class Robot(models.Model):
 	owner = models.CharField(max_length=100)
 
 	def __unicode__(self):
-		return self.name
+		return self.name + " id=" + str(self.id) 
 
 class Match(models.Model):
 	challenger = models.ForeignKey(Robot, related_name='as_challenger')

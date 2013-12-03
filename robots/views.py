@@ -4,10 +4,10 @@ from django.core.urlresolvers import reverse
 from robots.models import Robot, Match
 from robots.challenge import play_match, calculate_elo_rank
 from django.shortcuts import render
+import collections
 
 # Create your views here.
 class RobotListView(generic.ListView):
-	# model = Robot
 	queryset = Robot.objects.order_by("-elo_score")
 
 class RobotDetailView(generic.DetailView):
@@ -38,7 +38,6 @@ def reset_scores(request):
 
 def run_tournament(request):
 	matches = []
-	tournament_record = dict([(bot.id, (0,0,0)) for bot in Robot.objects.all()])
 	
 	for challenger in Robot.objects.all():
 		for defender in Robot.objects.exclude(pk=challenger.id):
@@ -46,33 +45,60 @@ def run_tournament(request):
 			if match is None:
 				return HttpResponse("Tournament failed: {0}".format(exc))
 			else:
-				challenger.elo_score, defender.elo_score = calculate_elo_rank(challenger.elo_score, defender.elo_score, match.challenger_score > match.defender_score)
-				challenger.save()
-				defender.save()
 				matches.append(match.id)
-				cw, cl, ct = tournament_record[challenger.id]
-				dw, dl, dt = tournament_record[defender.id]
-				if match.challenger_score > match.defender_score:
-					cw += 1
-					dl += 1
-				elif match.challenger_score < match.defender_score:
-					dw += 1
-					cl += 1
-				else:
-					ct += 1
-					dt += 1
-				tournament_record[challenger.id] = (cw, cl, ct) 
-				tournament_record[defender.id] = (dw, dl, dt) 
+				print str(challenger.name) + " played " + str(defender.name) + ", result: " + str(match.challenger_score) + "-" + str(match.defender_score)
+
 	request.session['matches'] = matches
-	request.session['t_record'] = tournament_record
-	return HttpResponseRedirect(reverse('robots:tourney_results'))
 	
+	return HttpResponseRedirect(reverse('robots:tourney_results'))
+
+def _process_tourney_results(matches):
+	tournament_record = collections.defaultdict(lambda:((0, 0, 0), {}))
+	for match in matches:
+		challenger = match.challenger
+		challenger_score = match.challenger_score
+		defender = match.defender
+		defender_score = match.defender_score
+		
+		challenger.elo_score, defender.elo_score = calculate_elo_rank(challenger.elo_score, defender.elo_score, challenger_score > defender_score)
+		challenger.save()
+		defender.save()
+		
+		c_scores, c_results = tournament_record[challenger.id]
+		c_results[defender.id] = match.id
+		d_scores, d_results = tournament_record[defender.id]
+		cw, ct, cl = c_scores
+		dw, dt, dl = d_scores
+		if challenger_score > defender_score:
+			cw += 1
+			dl += 1
+		elif challenger_score < defender_score:
+			dw += 1
+			cl += 1
+		else:
+			ct += 1
+			dt += 1
+		tournament_record[challenger.id] = ((cw, ct, cl), c_results)
+		tournament_record[defender.id] = ((dw, dt, dl), d_results)
+	return tournament_record
+
 def tourney_results(request):
-	matches = request.session['matches']
-	tournament_record = request.session['t_record']
-	result_list = [(Robot.objects.get(pk=bot_id), record) for (bot_id, record) in tournament_record.items()]
-	result_list.sort(cmp=lambda (bot_x, bot_x_rec), (bot_y, bot_y_rec): -cmp(bot_x.elo_score, bot_y.elo_score))
+	tournament_record = _process_tourney_results([Match.objects.get(pk=match_id) for match_id in request.session['matches']])
+	
+	sorted_bots = [Robot.objects.get(pk=challenger) for challenger in tournament_record.keys()]
+	sorted_bots.sort(key=lambda x: x.elo_score, reverse=True)
+	
+	results = []
+	for challenger in sorted_bots:
+		scores, matches = tournament_record[challenger.id]
+		sorted_matches = []
+		for defender in sorted_bots:
+			try:
+				sorted_matches.append(Match.objects.get(pk=matches[defender.id]))
+			except KeyError:
+				sorted_matches.append(None)
+		results.append((challenger, scores, sorted_matches))
+	
 	return render(request, 'robots/tourney_results.html', {
-		'match_list': Match.objects.filter(pk__in=matches),
-		't_record': result_list,											
+		't_record': results,											
 	})
