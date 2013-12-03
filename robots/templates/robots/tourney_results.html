@@ -1,9 +1,27 @@
 {% load staticfiles %}
 <link rel="stylesheet" type="text/css" href="{% static 'robots/css/main.css' %}" />
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
 
 <h2>Tournament results</h2>
 
+
+<table>
+  <tr>
+    <th></th>
+    <th>Won</th>
+    <th>Lost</th>
+    <th>Tied</th>
+  </tr>
+{% for bot, record in t_record %}
+  <tr>
+    <td><a href="{% url 'robots:detail' bot.id %}">{{ bot.name }} ({{ bot.elo_score }})</a></td>
+    <td>{{record.0}}</td>
+    <td>{{record.1}}</td>
+    <td>{{record.2}}</td>
+  </tr>
+{% endfor %}
+</table>
+
+<h3>Matches</h3>
 <ul>
 {% for match in match_list %}
 	<li><a href="{% url 'robots:match' match.id %}">{{ match.challenger.name }} vs {{ match.defender.name }}: {{ match.challenger_score }} - {{ match.defender_score }}</a></li>
