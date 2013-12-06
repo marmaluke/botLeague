@@ -385,3 +385,16 @@ a.normal {
     box-shadow: 0 2px 2px 0px #aaaaaa;
     border-radius: 4px;
     margin-bottom: 0.5em; }
+
+.win {
+  background-color: #bbffbb;
+}
+.loss {
+  background-color: #ffbbbb;
+}
+.row-odd {
+  background-color: #ddddff;
+}
+.row-even {
+  
+}

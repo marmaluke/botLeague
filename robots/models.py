@@ -8,7 +8,7 @@ class Robot(models.Model):
 	owner = models.CharField(max_length=100)
 
 	def __unicode__(self):
-		return self.name + " id=" + str(self.id) 
+		return self.name 
 
 class Match(models.Model):
 	challenger = models.ForeignKey(Robot, related_name='as_challenger')
@@ -19,5 +19,13 @@ class Match(models.Model):
 	game_play = models.TextField()
 	game_play.allow_tags = True
 
+	def get_winner(self):
+		if self.challenger_score > self.defender_score:
+			return self.challenger
+		elif self.challenger_score < self.defender_score:
+			return self.defender
+		else:
+			return None
+
 	def __unicode__(self):
-		return str(self.challenger) + " vs " + str(self.defender)
+		return "{0} vs {1}".format(self.challenger, self.defender)
