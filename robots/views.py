@@ -16,6 +16,8 @@ class RobotDetailView(generic.DetailView):
 	def get_context_data(self, **kwargs):
 		context = super(RobotDetailView, self).get_context_data(**kwargs)
 		context['all_bots'] = Robot.objects.all()
+		match_history = self.object.as_challenger.all() | self.object.as_defender.all()
+		context['match_history'] = match_history.order_by('-match_date')
 		return context
 	
 class MatchDetailView(generic.DetailView):
@@ -34,6 +36,7 @@ def reset_scores(request):
 	for bot in Robot.objects.all():
 		bot.elo_score = 1200
 		bot.save()
+	Match.objects.all().delete()
 	return HttpResponseRedirect(reverse('robots:index'))
 
 def run_tournament(request):
