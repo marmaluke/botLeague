@@ -10,6 +10,18 @@ import collections
 class RobotListView(generic.ListView):
     queryset = Robot.objects.order_by("-elo_score")
 
+    def post(self, request, *args, **kwargs):
+        if 'run_tournament' in request.POST:
+            return _run_tournament(request)
+        elif 'reset' in request.POST:
+            for bot in Robot.objects.all():
+                bot.elo_score = 1200
+                bot.save()
+            Match.objects.all().delete()
+            return HttpResponseRedirect(reverse('robots:index'))
+        else:
+            return HttpResponseRedirect(reverse('robots:index'))
+
 class RobotDetailView(generic.DetailView):
     model = Robot
 
@@ -22,9 +34,11 @@ class RobotDetailView(generic.DetailView):
 
 class RobotCreateView(generic.CreateView):
     model = Robot
+    fields = ['name', 'path', 'owner']
 
 class RobotUpdateView(generic.UpdateView):
     model = Robot
+    fields = ['name', 'path', 'owner']
 
 class RobotDeleteView(generic.DeleteView):
     model = Robot
@@ -42,14 +56,7 @@ def challenge(request, pk):
     else:
         return HttpResponseRedirect(reverse('robots:match', args=(match.id,)))
     
-def reset_scores(request):
-    for bot in Robot.objects.all():
-        bot.elo_score = 1200
-        bot.save()
-    Match.objects.all().delete()
-    return HttpResponseRedirect(reverse('robots:index'))
-
-def run_tournament(request):
+def _run_tournament(request):
     matches = []
     
     for challenger in Robot.objects.all():

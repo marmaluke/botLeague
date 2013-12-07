@@ -4,6 +4,8 @@
 <h2>{{ object.name }}</h2>
 <div><strong>owner</strong> {{ object.owner }}</div>
 <div><strong>Elo rating</strong> {{ object.elo_score }}</div>
+<a href="update">(update)</a>
+<a href="delete">(delete)</a>
 <form action="{% url 'robots:challenge' object.id %}" method="POST">
 	{% csrf_token %}
 	<label for="opponent">Challenge opponent</label>
