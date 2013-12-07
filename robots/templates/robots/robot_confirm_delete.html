@@ -1,0 +1,6 @@
+<h2>Really delete?</h2>
+{{ object }}
+<form action="." method="POST">
+	{% csrf_token %}
+	<input type="submit" value="Delete" />
+</form>

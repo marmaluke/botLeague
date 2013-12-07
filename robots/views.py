@@ -1,6 +1,6 @@
 from django.views import generic
 from django.http import HttpResponse, HttpResponseRedirect
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 from robots.models import Robot, Match
 from robots.challenge import play_match, calculate_elo_rank
 from django.shortcuts import render
@@ -19,6 +19,16 @@ class RobotDetailView(generic.DetailView):
         match_history = self.object.as_challenger.all() | self.object.as_defender.all()
         context['match_history'] = match_history.order_by('-match_date')
         return context
+
+class RobotCreateView(generic.CreateView):
+    model = Robot
+
+class RobotUpdateView(generic.UpdateView):
+    model = Robot
+
+class RobotDeleteView(generic.DeleteView):
+    model = Robot
+    success_url = reverse_lazy('robots:index')
     
 class MatchDetailView(generic.DetailView):
     model = Match
