@@ -7,6 +7,7 @@
 	<a href="{% url 'robots:detail' object.challenger.id %}">{{ object.challenger.name }}</a>
  	vs
  	<a href="{% url 'robots:detail' object.defender.id %}">{{ object.defender.name }}</a>
+    ({{ object.challenger_score }}-{{ object.defender_score }})
  </h2>
 <a href="{% url 'robots:index' %}">Back to index</a>
 <div><strong>Played at</strong> {{ object.match_date|localtime|date:'N j, Y, P T' }}</div>

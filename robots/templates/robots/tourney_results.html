@@ -3,7 +3,6 @@
 
 <h2>Tournament results</h2>
 
-
 <table>
 	<tr>
 		<th></th>
@@ -15,7 +14,8 @@
 		{% endfor %}
 	</tr>
 {% for bot, scores, record in t_record %}
-  <tr>
+  {% cycle '#ddddff', '' as color silent %}
+  <tr class="{% cycle 'row-odd' 'row-even' %}">
     <td><a href="{% url 'robots:detail' bot.id %}">{{ bot.name }} ({{ bot.elo_score }})</a></td>
     <td>{{scores.0}}</td>
     <td>{{scores.1}}</td>
