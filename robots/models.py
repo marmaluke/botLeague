@@ -27,7 +27,10 @@ class Tourney(models.Model):
     def get_winner(self):
         tournament_record = self.get_tournament_record()
         ranked = sorted(self.get_bots(), key=lambda b:2 * tournament_record[b][0][0] + tournament_record[b][0][1], reverse=True)
-        return ranked[0]
+        if len(ranked) > 0:
+            return ranked[0]
+        else:
+            return None
     
     def get_tournament_record(self):
         tournament_record = collections.defaultdict(lambda:((0, 0, 0), {}))
