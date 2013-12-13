@@ -1,0 +1,17 @@
+{% load staticfiles %}
+{% load tz %}
+<link rel="stylesheet" type="text/css" href="{% static 'robots/css/main.css' %}" />
+
+<h1>Tournament History</h1>
+
+<a href="{% url 'robots:index' %}">Bot index</a>
+
+<ul>
+{% for tourney in object_list %}
+    <li><a href="{{ tourney.get_absolute_url }}">{{ tourney.tourney_date|localtime|date:'N j, Y, P T' }} - winner: {{ tourney.get_winner }}</a></li>
+{% empty %}
+    <li>No tournaments yet.</li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'robots:index' %}">Bot index</a>

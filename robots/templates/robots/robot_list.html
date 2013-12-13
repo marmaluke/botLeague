@@ -2,7 +2,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'robots/css/main.css' %}" />
 
 <h1>Robots</h1>
-
+<div></div><a href="{% url 'robots:tourney_list' %}">Tournament history</a></div>
 <ul>
 {% for bot in object_list %}
     <li><a href="{{ bot.get_absolute_url }}">{{ bot.name }} ({{ bot.elo_score }})</a></li>
@@ -17,5 +17,4 @@
 	<input type="submit" name="run_tournament" value="Run tournament"/>
 	<input type="submit" name="reset" value="Reset"/>
 </form>
-
-
+<div></div><a href="{% url 'robots:tourney_list' %}">Tournament history</a></div>

@@ -1,8 +1,7 @@
 import base
-
+from bots import *
 from rgkit import game
 from rgkit.settings import settings
-from bots import *
 
 class TestMove(base.BaseTestCase):
     def test_move_no_collision(self):
@@ -98,8 +97,13 @@ class TestMove(base.BaseTestCase):
         assert(bot3)
         assert(bot4)
 
-    def test_save_robot_state(self):
-        [bot1], _ = self.simulate(
-            [RobotSaveState, RobotSaveState],
-            [(9, 9)], [(8, 9)], [], [], turns=2)
-        assert(bot1)
+    def test_double_collision(self):
+        [bot1], [bot2, bot3] = self.simulate(
+            [RobotMoveRight, RobotMoveUp],
+            [(9, 10)], [(9, 10)],
+            [(9, 11), (10, 11)], [(9, 11), (10, 11)])
+
+        # TODO(https://github.com/WhiteHalmos/rgkit/issues/7): Better collision handling
+        #assert(bot1.hp == 40)
+        #assert(bot2.hp == 45)
+        #assert(bot3.hp == 45)

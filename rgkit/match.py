@@ -4,7 +4,6 @@ import ast
 import argparse
 ###
 import game
-from settings import settings
 
 parser = argparse.ArgumentParser(description="Robot game execution script.")
 parser.add_argument("usercode1",
@@ -24,9 +23,8 @@ if __name__ == '__main__':
 
     players = [game.Player(open(args.usercode1).read()),
                game.Player(open(args.usercode2).read())]
-    g = game.Game(*players, record_turns=True)
-    for i in range(settings.max_turns):
-        g.run_turn()
+    g = game.Game(*players, print_info=False, record_actions=True, record_history = True)
+    g.run_all_turns()
     
     print "history={0}".format(g.history)
     print "scores={0}".format(g.get_scores())

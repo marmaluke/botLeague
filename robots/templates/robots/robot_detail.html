@@ -16,6 +16,7 @@
 	</select>
 	<input type="submit" value="Fight!"/>
 </form>
+<div><a href="{% url 'robots:index' %}">Back to Bot index</a></div>
 <h3>Matches played</h3>
 <ul>
 {% for match in match_history %}
@@ -23,4 +24,4 @@
 {% endfor %}
 </ul>
 
-<a href="{% url 'robots:index' %}">Back to index</a>
+<div><a href="{% url 'robots:index' %}">Back to Bot index</a></div>

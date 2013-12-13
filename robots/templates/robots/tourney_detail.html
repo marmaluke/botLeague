@@ -1,0 +1,37 @@
+{% load staticfiles %}
+{% load tz %}
+<link rel="stylesheet" type="text/css" href="{% static 'robots/css/main.css' %}" />
+
+<h2>Tournament results</h2>
+<h4>Played on {{ object.tourney_date|localtime|date:'N j, Y, P T' }}</h4>
+
+<table>
+	<tr>
+		<th></th>
+		<th>Win</th>
+		<th>Tie</th>
+		<th>Lose</th>
+		{% for bot, x, y in t_record %}
+		<th>vs <a href="{% url 'robots:detail' bot.id %}">{{ bot.name }}</a></th>
+		{% endfor %}
+	</tr>
+{% for bot, scores, record in t_record %}
+  {% cycle '#ddddff', '' as color silent %}
+  <tr class="{% cycle 'row-odd' 'row-even' %}">
+    <td><a href="{% url 'robots:detail' bot.id %}">{{ bot.name }} ({{ bot.elo_score }})</a></td>
+    <td>{{scores.0}}</td>
+    <td>{{scores.1}}</td>
+    <td>{{scores.2}}</td>
+    {% for match in record %}
+    	{% if match %}
+    	<td><a href="{% url 'robots:match' match.id %}">{{ match.challenger_score }} - {{ match.defender_score }}</a></td>
+    	{% else %}
+    	<td>X</td>
+    	{% endif %}
+  	{% endfor %}
+  </tr>
+{% endfor %}
+</table>
+
+<div></div><a href="{% url 'robots:tourney_list' %}">Back to Tournament history</a></div>
+<div><a href="{% url 'robots:index' %}">Back to Bot index</a></div>

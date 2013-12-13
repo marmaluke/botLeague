@@ -7,6 +7,7 @@ import os
 
 #elo rank algorithm     
 def calculate_elo_rank(challenger_rank=1600, defender_rank=1600, challenger_won=True, penalize_loser=True):
+    '''Return a tuple (new_challenger_rank, new_defender_rank)'''
     if challenger_won:
         winner_rank, loser_rank = challenger_rank, defender_rank
     else:

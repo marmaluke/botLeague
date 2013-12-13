@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     url(r'bots/(?P<pk>\d+)/delete/$', views.RobotDeleteView.as_view(), name='delete'),
     url(r'bots/add/$', views.RobotCreateView.as_view(), name='add'),
     url(r'matches/(?P<pk>\d+)/$', views.MatchDetailView.as_view(), name='match'),
+    url(r'tournaments/$', views.TourneyListView.as_view(), name='tourney_list'),
+    url(r'tournaments/(?P<pk>\d+)/$', views.TourneyDetailView.as_view(), name='tourney'),
     url(r'bots/(?P<pk>\d+)/challenge/$', views.challenge, name='challenge'),
-    url(r'results/$', views.tourney_results, name='tourney_results'),
 )

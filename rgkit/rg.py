@@ -1,11 +1,6 @@
-# users will import rg to be able to use robot game functions
-import math
-import operator
+from math import sqrt
 
 settings = None
-
-# constants
-
 CENTER_POINT = None
 
 def after_settings():
@@ -18,10 +13,13 @@ def set_settings(s):
     settings = s
     after_settings()
 
-##############################
+#################################################
 
-dist = lambda p1, p2: math.sqrt((p2[0]-p1[0])**2 + (p2[1]-p1[1])**2)
-wdist = lambda p1, p2: abs(p2[0]-p1[0]) + abs(p2[1]-p1[1])
+def dist(p1, p2):
+    return sqrt((p2[0] - p1[0]) ** 2 + (p2[1] - p1[1]) ** 2)
+
+def wdist(p1, p2):
+    return abs(p2[0] - p1[0]) + abs(p2[1] - p1[1])
 
 def memodict(f):
     """ Memoization decorator for a function taking a single argument """
@@ -34,24 +32,25 @@ def memodict(f):
 @memodict
 def loc_types(loc):
     for i in range(2):
-        if not (0 <= loc[i] < settings.board_size):
-            return ['invalid']
-    types = ['normal']
+        if not 0 <= loc[i] < settings.board_size:
+            return set(['invalid'])
+
+    types = set(['normal'])
     if loc in settings.spawn_coords:
-        types.append('spawn')
+        types.add('spawn')
     if loc in settings.obstacles:
-        types.append('obstacle')
+        types.add('obstacle')
     return types
 
 @memodict
 def _locs_around(loc):
+    x, y = loc
     offsets = ((0, 1), (1, 0), (0, -1), (-1, 0))
-    return [tuple(map(operator.add, loc, o)) for o in offsets]
+    return [(x + dx, y + dy) for dx, dy in offsets]
 
 def locs_around(loc, filter_out=None):
-    filter_out = filter_out or []
-    return [loc for loc in _locs_around(loc) if
-            len(set(filter_out) & set(loc_types(loc))) == 0]
+    filter_out = set(filter_out or [])
+    return [loc for loc in _locs_around(loc) if len(filter_out & loc_types(loc)) == 0]
 
 def toward(curr, dest):
     if curr == dest:

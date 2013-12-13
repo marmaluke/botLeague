@@ -10,17 +10,24 @@ settings = {
     'max_turns': 100,
 
     # rendering
-    'turn_interval': 100,
+    'FPS': 60,  # frames per second
+    'turn_interval': 300,  # milliseconds per turn
+    'colors': [(0.9, 0, 0.2), (0, 0.9, 0.2)],
+    'obstacle_color': (.2, .2, .2),
+    'normal_color': (.9, .9, .9),
+    'highlight_color': (0.6, 0.6, 0.6),
+    'target_color': (0.6, 0.6, 1),
 
     # rating systems
     'rating_range': 150,
     'default_rating': 1200,
 
     # user-scripting
-    'max_usercode_time': 300,
+    'max_usercode_time': 1500,
     'exposed_properties': ('location', 'hp', 'player_id'),
+    'player_only_properties': ('robot_id',),
+    'user_obj_types': ('Robot',),
     'valid_commands': ('move', 'attack', 'guard', 'suicide'),
-    'user_obj_types': ('Commander', 'Robot', 'TankRobot'),
     'user_modules': ('numpy', 'euclid', 'random'),
 }
 
